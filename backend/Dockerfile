@@ -1,9 +1,10 @@
-FROM python:3.13.2-slim
+FROM python:3.12-slim
 
 WORKDIR /app/
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV POETRY_VIRTUALENVS_CREATE=false
 ENV PATH="/root/.local/bin:${PATH}"
 
 RUN apt-get update && \
@@ -14,11 +15,11 @@ RUN pip install --upgrade pip && \
     pip install pipx && \
     pipx install poetry
 
-COPY . /app/
-
 COPY pyproject.toml poetry.lock /app/
 
-RUN poetry install
+RUN poetry install --no-root
+
+COPY . /app/
 
 EXPOSE 8000
 
