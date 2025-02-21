@@ -49,8 +49,17 @@ poetry shell
 ```
 poetry install
 ```
+### 5️⃣ Set up the .env file in the backend directory:
+```
+SECRET_KEY=
+ALLOWED_HOSTS=
+POSTGRES_NAME=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+DEBUG=
+```
 
-### 5️⃣ Set the Python interpreter path in your IDE:
+### 6️⃣ Set the Python interpreter path in your IDE:
 
 1. Run the following command to get the virtual environment path:
    ```
