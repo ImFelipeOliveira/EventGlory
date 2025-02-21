@@ -12,9 +12,9 @@ Authentication: JWT-based authentication for secure user access.
 
 ## 🛠️ Technologies
 
-Backend: Django + Django REST Framework + PostgreSQL
-Authentication: Django Auth / Simple JWT
-Dependency Management: Poetry
+- **Backend:** Django + Django REST Framework + PostgreSQL
+- **Authentication:** Django Auth / Simple JWT
+- **Dependency Management:** Poetry
 
 # How to Use
 
