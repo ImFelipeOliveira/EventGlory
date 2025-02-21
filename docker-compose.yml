@@ -6,6 +6,9 @@ services:
     ports:
       - "8000:8000"
       - "3000:3000"
+    volumes:
+      - ./backend:/app
+    command: sh -c "python src/manage.py makemigrations && python src/manage.py migrate && python src/manage.py runserver 0.0.0.0:8000"
     env_file:
       - ./backend/.env
     depends_on:
