@@ -50,7 +50,7 @@ ignore = [
     "W191",  # indentation contains tabs
     "D401",  # imperative mood
     "D101",
-    "D102"
+    "D102",
     "D100",
     "D106"
 ]
