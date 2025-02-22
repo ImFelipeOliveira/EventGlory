@@ -67,8 +67,10 @@ class Event(BaseModel):
         on_delete=models.CASCADE,
     )
     name = models.CharField()
+    image = models.ImageField(name="logo", blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
 
 
