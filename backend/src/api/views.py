@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from api.serializers import EventSerializer
@@ -9,7 +8,8 @@ from .models import Event
 
 
 class EventViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
 
     def list(self, request):
         queryset = Event.objects.all()
