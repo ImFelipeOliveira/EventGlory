@@ -67,7 +67,12 @@ class Event(BaseModel):
         on_delete=models.CASCADE,
     )
     name = models.CharField()
-    image = models.ImageField(upload_to="logos/",name="logo", blank=True, null=True)
+    image = models.ImageField(
+        upload_to="logos/",
+        verbose_name="logo",
+        blank=True,
+        null=True,
+    )
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
