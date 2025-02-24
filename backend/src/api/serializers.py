@@ -12,7 +12,7 @@ class EventSerializer(serializers.Serializer):
     price = serializers.DecimalField(decimal_places=2, max_digits=6)
 
     class Meta:
-        Model = Event
+        model = Event
         fields = [
             "name",
             "image",
