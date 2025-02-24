@@ -28,9 +28,13 @@ class BaseModel(models.Model):
 
 
 class Endereco(BaseModel):
-    rua = models.CharField(max_length=40)
+    logradouro = models.CharField(max_length=40)
+    numero = models.IntegerField(null=True, blank=True)
     bairro = models.CharField(max_length=40)
     cidade = models.CharField(max_length=10)
+
+    def __str__(self):  # noqa: D105
+        return f"{self.logradouro}, {self.numero}"
 
 
 class Contato(BaseModel):
@@ -42,7 +46,7 @@ class Pessoa(BaseModel):
         User,
         on_delete=models.CASCADE,
         null=True,  # Permite que dependentes não tenham user
-        blank=True
+        blank=True,
     )
     name = models.CharField()
     sexo = models.CharField(
@@ -62,6 +66,9 @@ class Pessoa(BaseModel):
         related_name="dependentes",
     )
 
+    def __str__(self):  # noqa: D105
+        return f"{self.name}"
+
 
 class Event(BaseModel):
     user = models.ForeignKey(
@@ -80,8 +87,14 @@ class Event(BaseModel):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
 
+    def __str__(self):  # noqa: D105
+        return f"{self.name}"
+
 
 class RegistrationQuerySet(models.QuerySet["Registration"]):
+    def user_is_register(self, user, event_id):
+        return self.filter(pessoas__user=user, event__id=event_id).exists()
+
     def user_events(self, user):
         return self.filter(pessoas__user=user)
 
@@ -101,6 +114,9 @@ class Registration(BaseModel):
         choices=RegStatus,
         default=RegStatus.PENDENTE,
     )
+
+    def register(self, user, event):
+        pass
 
 
 class Payment(models.Model):
