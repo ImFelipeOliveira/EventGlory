@@ -102,10 +102,6 @@ class Registration(BaseModel):
         default=RegStatus.PENDENTE,
     )
 
-    @property
-    def is_register(self, user_event):
-        return user_event in self.event
-
 
 class Payment(models.Model):
     registration = models.ForeignKey(Registration, on_delete=models.CASCADE)
