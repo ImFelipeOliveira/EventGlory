@@ -41,6 +41,8 @@ class Pessoa(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        null=True,  # Permite que dependentes não tenham user
+        blank=True
     )
     name = models.CharField()
     sexo = models.CharField(
@@ -50,7 +52,7 @@ class Pessoa(BaseModel):
     endereco = models.ForeignKey(
         Endereco,
         on_delete=models.CASCADE,
-        related_name="enderecos",
+        related_name="moradores",
     )
     responsavel = models.ForeignKey(
         "self",
@@ -79,7 +81,14 @@ class Event(BaseModel):
     price = models.DecimalField(decimal_places=2, max_digits=6)
 
 
+class RegistrationQuerySet(models.QuerySet["Registration"]):
+    def user_events(self, user):
+        return self.filter(pessoas__user=user)
+
+
 class Registration(BaseModel):
+    objects: RegistrationQuerySet = RegistrationQuerySet.as_manager()
+
     event = models.ManyToManyField(
         Event,
         related_name="eventos",
@@ -92,6 +101,10 @@ class Registration(BaseModel):
         choices=RegStatus,
         default=RegStatus.PENDENTE,
     )
+
+    @property
+    def is_register(self, user_event):
+        return user_event in self.event
 
 
 class Payment(models.Model):
