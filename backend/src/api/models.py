@@ -92,9 +92,6 @@ class Event(BaseModel):
 
 
 class RegistrationQuerySet(models.QuerySet["Registration"]):
-    def user_is_register(self, user, event_id):
-        return self.filter(pessoas__user=user, event__id=event_id).exists()
-
     def user_events(self, user):
         return self.filter(pessoas__user=user)
 
@@ -115,8 +112,9 @@ class Registration(BaseModel):
         default=RegStatus.PENDENTE,
     )
 
-    def register(self, user, event):
-        pass
+    @property
+    def user_is_register(self, user, event_id):
+        return self.filter(pessoas__user=user).exists()
 
 
 class Payment(models.Model):

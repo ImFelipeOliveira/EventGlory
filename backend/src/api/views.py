@@ -3,9 +3,10 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.serializers import EventSerializer
+from api.serializers import EventSerializer, PessoaSerializer
 
-from .models import Event
+from .models import Event, Pessoa
+from .services import DependentesService
 
 
 class EventViewSet(viewsets.ViewSet):
@@ -33,3 +34,13 @@ class EventViewSet(viewsets.ViewSet):
             "Evento criado com sucesso.",
             status=status.HTTP_201_CREATED,
         )
+
+class DependentsListViewSet(viewsets.ViewSet):
+    serializer_class = PessoaSerializer
+    queryset = Pessoa.objects.none()
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        queryset = DependentesService().get_dependentes_from_user(user=self.request.user)
+        serializer = PessoaSerializer(queryset, many=True)
+        return Response(serializer.data)

@@ -1,6 +1,6 @@
 from rest_framework import serializers  # type: ignore
 
-from .models import Event
+from .models import Event, Pessoa, Registration
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -14,3 +14,9 @@ class EventSerializer(serializers.ModelSerializer):
             "description",
             "price",
         ]
+
+
+class PessoaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pessoa
+        fields = "__all__"
