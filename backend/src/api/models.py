@@ -49,6 +49,7 @@ class Pessoa(BaseModel):
         blank=True,
     )
     name = models.CharField()
+    date_of_birth = models.DateField(null=True)
     sexo = models.CharField(
         choices=Sexo,
         max_length=1,
