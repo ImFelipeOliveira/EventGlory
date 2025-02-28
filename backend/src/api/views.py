@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
@@ -14,6 +15,7 @@ class CreatePersonViewSet(viewsets.ViewSet):
     serializer_class = CreatePersonSerializer
     permission_classes = [IsAuthenticated, UserIsNotPerson]
 
+    @extend_schema(responses={201: "msg"})
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
