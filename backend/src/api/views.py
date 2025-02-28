@@ -3,10 +3,32 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.serializers import EventSerializer, PessoaSerializer
+from api.permissions import UserIsNotPerson
+from api.serializers import CreatePersonSerializer, EventSerializer, PessoaSerializer
 
 from .models import Event, Pessoa
-from .services import DependentesService
+from .services import DependentesService, PersonService
+
+
+class CreatePersonViewSet(viewsets.ViewSet):
+    serializer_class = CreatePersonSerializer
+    permission_classes = [IsAuthenticated, UserIsNotPerson]
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        PersonService().create_person(
+            user=request.user,
+            validate_data=serializer.validated_data,
+        )
+        return Response(
+            "Usuário criado com sucesso.",
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class EventViewSet(viewsets.ViewSet):
@@ -35,6 +57,7 @@ class EventViewSet(viewsets.ViewSet):
             status=status.HTTP_201_CREATED,
         )
 
+
 class DependentsListViewSet(viewsets.ViewSet):
     serializer_class = PessoaSerializer
     queryset = Pessoa.objects.none()
@@ -42,5 +65,5 @@ class DependentsListViewSet(viewsets.ViewSet):
 
     def list(self, request):
         queryset = DependentesService().get_dependentes_from_user(user=self.request.user)
-        serializer = PessoaSerializer(queryset, many=True)
+        serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
