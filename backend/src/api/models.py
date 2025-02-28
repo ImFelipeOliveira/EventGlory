@@ -40,7 +40,6 @@ class Endereco(BaseModel):
 class Contato(BaseModel):
     telefone = models.CharField(max_length=14)
 
-
 class Pessoa(BaseModel):
     user = models.ForeignKey(
         User,
@@ -56,6 +55,8 @@ class Pessoa(BaseModel):
     )
     endereco = models.ForeignKey(
         Endereco,
+        null=True,
+        blank=True,
         on_delete=models.CASCADE,
         related_name="moradores",
     )
@@ -69,7 +70,6 @@ class Pessoa(BaseModel):
 
     def __str__(self):  # noqa: D105
         return f"{self.name}"
-
 
 class Event(BaseModel):
     user = models.ForeignKey(
@@ -86,6 +86,7 @@ class Event(BaseModel):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
+    min_age = models.DateField(null=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
 
     def __str__(self):  # noqa: D105
