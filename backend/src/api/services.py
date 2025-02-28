@@ -14,8 +14,7 @@ class RegistrationService(BaseService):
 
 class DependentesService(BaseService):
     def get_dependentes_from_user(self, user: User):
-        dependentes = Pessoa.objects.filter(responsavel__user=user)
-        return dependentes
+        return Pessoa.objects.dependentes_from_user(user)
 
 
 class PersonService(BaseService):

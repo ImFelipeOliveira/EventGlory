@@ -40,7 +40,14 @@ class Endereco(BaseModel):
 class Contato(BaseModel):
     telefone = models.CharField(max_length=14)
 
+
+class PessoaQuerySet(models.QuerySet["Pessoa"]):
+    def dependentes_from_user(self, user):
+        return self.filter(responsavel__user=user)
+
+
 class Pessoa(BaseModel):
+    objects: PessoaQuerySet = PessoaQuerySet().as_manager()
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -70,6 +77,7 @@ class Pessoa(BaseModel):
 
     def __str__(self):  # noqa: D105
         return f"{self.name}"
+
 
 class Event(BaseModel):
     user = models.ForeignKey(
