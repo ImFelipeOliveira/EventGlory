@@ -75,8 +75,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 # Authentication OAuth2
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -152,10 +152,10 @@ REST_FRAMEWORK = {
         )
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        # "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'drf_social_oauth2.authentication.SocialAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+        "drf_social_oauth2.authentication.SocialAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
