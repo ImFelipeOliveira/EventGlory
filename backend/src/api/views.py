@@ -17,6 +17,7 @@ class CreatePersonViewSet(viewsets.ViewSet):
 
     @extend_schema(responses={201: "msg"})
     def create(self, request):
+        """Endpoint de criação e vinculação do usuário padrão do django com a entidade Pessoa."""
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
             return Response(
