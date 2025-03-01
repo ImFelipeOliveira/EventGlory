@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -20,11 +21,28 @@ class PayStatus(models.TextChoices):
 
 
 class BaseModel(models.Model):
-    update = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="%(class)s_created",
+        verbose_name="created_by",
+    )
+    updated_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="%(class)s_updated",
+        verbose_name="updated_by",
+    )
 
     class Meta:
         abstract = True
+        ordering = ["-created"]
 
 
 class Endereco(BaseModel):
