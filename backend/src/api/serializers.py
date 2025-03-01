@@ -3,6 +3,16 @@ from rest_framework import serializers  # type: ignore
 from .models import Endereco, Event, Pessoa
 
 
+class TokenSerializer(serializers.Serializer):
+    access_token = serializers.CharField()
+    refresh_token = serializers.CharField()
+    expires_in = serializers.IntegerField()
+
+
+class EmptySerializer(serializers.Serializer):
+    pass
+
+
 class MessageSerializer(serializers.Serializer):
     message = serializers.CharField(default="Message")
 

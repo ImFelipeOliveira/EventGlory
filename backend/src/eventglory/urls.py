@@ -16,11 +16,20 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
+)
+
+from api.schemes.oauth2_schemas import (
+    CustomConvertTokenView,
+    CustomDisconnectBackendView,
+    CustomInvalidateRefreshTokens,
+    CustomInvalidateSessions,
+    CustomRevokeTokenView,
+    CustomTokenView,
 )
 
 urlpatterns = [
@@ -30,7 +39,12 @@ urlpatterns = [
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # DRF-social-Oauth2
-    re_path(r"^auth/", include("drf_social_oauth2.urls", namespace="drf")),
+    path("oauth/token/", CustomTokenView.as_view(), name="token"),
+    path("oauth/convert-token/", CustomConvertTokenView.as_view(), name="convert_token"),
+    path("oauth/revoke-token/", CustomRevokeTokenView.as_view(), name="revoke_token"),
+    path("oauth/disconnect/", CustomDisconnectBackendView.as_view(), name="disconnect_backend"),
+    path("oauth/invalidate-sessions/", CustomInvalidateSessions.as_view(), name="invalidate_sessions"),
+    path("oauth/invalidate-refresh-tokens/", CustomInvalidateRefreshTokens.as_view(), name="invalidate_refresh_tokens"),
     # Documentation
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
