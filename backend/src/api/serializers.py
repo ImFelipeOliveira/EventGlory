@@ -3,6 +3,10 @@ from rest_framework import serializers  # type: ignore
 from .models import Endereco, Event, Pessoa
 
 
+class MessageSerializer(serializers.Serializer):
+    message = serializers.CharField(default="Message")
+
+
 class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Endereco

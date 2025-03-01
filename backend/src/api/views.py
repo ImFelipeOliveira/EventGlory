@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.permissions import UserIsNotPerson
-from api.serializers import CreatePersonSerializer, EventSerializer, PessoaSerializer
+from api.serializers import CreatePersonSerializer, EventSerializer, MessageSerializer, PessoaSerializer
 
 from .models import Event, Pessoa
 from .services import DependentesService, EventService, PersonService
@@ -16,7 +16,7 @@ class CreatePersonViewSet(viewsets.ViewSet):
     serializer_class = CreatePersonSerializer
     permission_classes = [IsAuthenticated, UserIsNotPerson]
 
-    @extend_schema(responses={201: "msg"})
+    @extend_schema(responses={201: MessageSerializer})
     def create(self, request):
         """Endpoint de criação e vinculação do usuário padrão do django com a entidade Pessoa."""
         serializer = self.serializer_class(data=request.data)
