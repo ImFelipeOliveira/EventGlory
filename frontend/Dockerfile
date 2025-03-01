@@ -35,17 +35,6 @@ RUN \
     fi
 
 # Production image, copy all the files and run next
-FROM base AS dev
-WORKDIR /app
-ENV NODE_ENV=development
-
-COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
-
-COPY . .
-
-CMD ["pnpm", "run", "dev"]
-
 
 FROM base AS runner
 WORKDIR /app
@@ -74,3 +63,16 @@ ENV PORT=3000
 # https://nextjs.org/docs/pages/api-reference/config/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
+
+# Development image
+FROM base AS dev
+WORKDIR /app
+
+ENV NODE_ENV=development
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+RUN apk add --no-cache bash
+
+CMD ["sh", "-c", "corepack enable && pnpm dev"]
