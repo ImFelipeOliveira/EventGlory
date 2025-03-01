@@ -5,7 +5,11 @@ from api.models import Endereco, Pessoa
 
 
 class BaseService:
-    pass
+    def get_person(self, user: User):
+        try:
+            return Pessoa.objects.get(user=user)
+        except Pessoa.DoesNotExist:
+            raise Pessoa.DoesNotExist("O usuário não possui vinculo com uma pessoa.")  # noqa: B904
 
 
 class RegistrationService(BaseService):
@@ -40,3 +44,6 @@ class PersonService(BaseService):
                     )
         except Exception as e:
             raise Exception(str(e))  # noqa: B904
+
+    def update_person(self, person_id: int, validated_date: dict):
+        pass
