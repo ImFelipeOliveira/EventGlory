@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
