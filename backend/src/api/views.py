@@ -70,6 +70,19 @@ class EventViewSet(viewsets.ViewSet):
             status=status.HTTP_201_CREATED,
         )
 
+    def destroy(self, request, pk):
+        try:
+            EventService().delete(pk)
+            return Response(
+                "Evento excluído com sucesso!",
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Event.DoesNotExist:
+            return Response(
+                {"error": "Evento não encontrado."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
 
 class DependentsListViewSet(viewsets.ViewSet):
     serializer_class = PessoaSerializer

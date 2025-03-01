@@ -12,6 +12,15 @@ class BaseService:
             raise Pessoa.DoesNotExist("O usuário não possui vinculo com uma pessoa.")  # noqa: B904
 
 
+class EventService(BaseService):
+    def delete(self, id: int):
+        try:
+            Event.objects.get(id=id).delete()
+            return True
+        except Event.DoesNotExist:
+            raise Event.DoesNotExist("O evento não existe.")  # noqa: B904
+
+
 class RegistrationService(BaseService):
     pass
 

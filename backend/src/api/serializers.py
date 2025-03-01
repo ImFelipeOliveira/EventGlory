@@ -34,13 +34,25 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = [
+            "id",
             "name",
             "image",
             "start_date",
             "end_date",
             "description",
             "price",
+            "created_by",
+            "updated_by",
         ]
+        read_only_fields = ["created_by", "updated_by"]
+
+    def create(self, validated_data):
+        user = validated_data.get("user")
+        event = Event(**validated_data)
+        event.created_by = user
+        event.updated_by = user
+        event.save()
+        return event
 
 
 class PessoaSerializer(serializers.ModelSerializer):
