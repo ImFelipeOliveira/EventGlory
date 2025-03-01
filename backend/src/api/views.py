@@ -11,16 +11,6 @@ from .models import Event, Pessoa
 from .services import DependentesService, PersonService
 
 
-class PersonViewSet(viewsets.ViewSet):
-    serializer_class = CreatePersonSerializer
-    permission_classes = [IsAuthenticated]
-
-    def list(self, request):
-        pessoa = PersonService().get_person(user=request.user)
-        serializer = self.serializer_class(pessoa)
-        return Response(serializer.data)
-
-
 class CreatePersonViewSet(viewsets.ViewSet):
     serializer_class = CreatePersonSerializer
     permission_classes = [IsAuthenticated, UserIsNotPerson]
@@ -42,6 +32,16 @@ class CreatePersonViewSet(viewsets.ViewSet):
             "Usuário criado com sucesso.",
             status=status.HTTP_201_CREATED,
         )
+
+
+class PersonViewSet(viewsets.ViewSet):
+    serializer_class = CreatePersonSerializer
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        pessoa = PersonService().get_person(user=request.user)
+        serializer = self.serializer_class(pessoa)
+        return Response(serializer.data)
 
 
 class EventViewSet(viewsets.ViewSet):
