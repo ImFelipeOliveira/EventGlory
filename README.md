@@ -8,12 +8,12 @@ Event creation and management: Administrators can create events, set dates, loca
 Participant registration: Users can sign up for events and track their registrations.
 Integrated payments: Option to make payments directly through the system.
 RESTful API: Endpoints developed with Django REST Framework for seamless integration with other applications.
-Authentication:  OAuth2-based authentication using drf_social_oauth2 for secure user access.
+Authentication:  OAuth2-based authentication using drf_social_oauth2 and Simple-JWT for secure user access.
 
 ## 🛠️ Technologies
 
 - **Backend:** Django + Django REST Framework + PostgreSQL
-- **Authentication:**  Django Auth / drf_social_oauth2
+- **Authentication:**  Simple-JWT / drf_social_oauth2
 - **Dependency Management:** Poetry
 
 # How to Use
