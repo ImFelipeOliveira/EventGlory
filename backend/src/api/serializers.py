@@ -30,7 +30,7 @@ class DependenteSerializer(serializers.ModelSerializer):
 
 
 class CreatePersonSerializer(serializers.ModelSerializer):
-    dependentes = DependenteSerializer(many=True)
+    dependentes = DependenteSerializer(many=True, required=False)
     endereco = EnderecoSerializer()
 
     class Meta:
