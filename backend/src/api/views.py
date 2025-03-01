@@ -8,7 +8,7 @@ from api.permissions import UserIsNotPerson
 from api.serializers import CreatePersonSerializer, EventSerializer, PessoaSerializer
 
 from .models import Event, Pessoa
-from .services import DependentesService, PersonService
+from .services import DependentesService, EventService, PersonService
 
 
 class CreatePersonViewSet(viewsets.ViewSet):
@@ -58,6 +58,12 @@ class EventViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
+        user: User = request.user
+        if not user.is_superuser and not user.is_staff:
+            return Response(
+                "Você não tem permissão para realizar essa ação",
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
             return Response(

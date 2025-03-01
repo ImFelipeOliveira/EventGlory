@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import transaction
 
-from api.models import Endereco, Pessoa
+from api.models import Endereco, Event, Pessoa
 
 
 class BaseService:
