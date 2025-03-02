@@ -52,7 +52,7 @@ export default function Login() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Senha</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Digite sua senha"
@@ -68,7 +68,7 @@ export default function Login() {
           </Form>
         </CardContent>
         <CardFooter>
-            <Button className="w-full">Login</Button>
+          <Button className="w-full">Login</Button>
         </CardFooter>
       </Card>
     </div>
