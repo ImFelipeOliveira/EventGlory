@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,10 +9,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const form = useForm();
+  const formMethods = useForm<{ email: string; password: string }>();
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="w-[400px]">
@@ -20,7 +31,45 @@ export default function Login() {
             Login
           </CardTitle>
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          <Form {...formMethods}>
+            <form action="" className="space-y-5">
+              <FormField
+                control={formMethods.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="gap-y-2">
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Digite um email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={formMethods.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Digite sua senha"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter>
+            <Button className="w-full">Login</Button>
+        </CardFooter>
       </Card>
     </div>
   );
