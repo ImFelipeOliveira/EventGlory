@@ -1,7 +1,30 @@
 from django.contrib.auth.models import User
 from django.db import transaction
+from rest_framework.exceptions import ValidationError
 
 from api.models import Endereco, Event, Pessoa
+
+
+class RegisterUserService:
+    """Serviço para registrar um novo usuário."""
+
+    @transaction.atomic
+    def create(self, data: dict):
+        if User.objects.filter(username=data["email"]).exists():
+            raise ValidationError("Já existe um usuário cadastrado com esse email.")
+
+        if data["password"] != data["password_confirmation"]:
+            raise ValidationError("As senhas não conferem.")
+
+        try:
+            user = User.objects.create(
+                username=data["email"],
+                email=data["email"],
+            )
+            user.set_password(data["password"])
+            user.save()
+        except Exception as e:
+            raise Exception(f"Erro ao criar usuário: {str(e)}")  # noqa: B904
 
 
 class BaseService:

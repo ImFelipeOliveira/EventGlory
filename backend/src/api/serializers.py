@@ -3,6 +3,12 @@ from rest_framework import serializers  # type: ignore
 from .models import Endereco, Event, Pessoa
 
 
+class RegisterUserSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    password_confirmation = serializers.CharField()
+
+
 class TokenSerializer(serializers.Serializer):
     access_token = serializers.CharField()
     refresh_token = serializers.CharField()

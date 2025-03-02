@@ -6,10 +6,33 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.permissions import UserIsNotPerson
-from api.serializers import CreatePersonSerializer, EventSerializer, MessageSerializer, PessoaSerializer
+from api.serializers import (
+    CreatePersonSerializer,
+    EventSerializer,
+    MessageSerializer,
+    PessoaSerializer,
+    RegisterUserSerializer,
+)
 
 from .models import Event, Pessoa
-from .services import DependentesService, EventService, PersonService
+from .services import DependentesService, EventService, PersonService, RegisterUserService
+
+
+class RegisterUser(viewsets.ViewSet):
+    serializer_class = RegisterUserSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if not serializer.is_valid():
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        RegisterUserService().create(serializer.validated_data)
+        return Response(
+            "Usuário criado com sucesso.",
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class CreatePersonViewSet(viewsets.ViewSet):
