@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { ToasterProps } from "sonner";
 import { useCookieToast } from "@/lib/toast/toast";
 
-export default async function ToastProvider({
+export default function ToastProvider({
   children,
 }: {
   children: React.ReactNode;
