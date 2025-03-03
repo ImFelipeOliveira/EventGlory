@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { JSX, SVGProps } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, MagnifyingGlassIcon} from "@radix-ui/react-icons";
 import Image from "next/image";
