@@ -64,7 +64,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [getenv("CORS_ALLOWED_ORIGINS")]
+CORS_ALLOWED_ORIGINS = getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+
+CORS_ALLOW_ALL_ORIGINS = bool(int(getenv("CORS_ALLOW_ALL_ORIGINS", "0")))
 
 ROOT_URLCONF = "eventglory.urls"
 
