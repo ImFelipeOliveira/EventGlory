@@ -15,8 +15,6 @@ export default async function registerUser(data: any) {
     await setCookieToast(response.error, response.error);
   } else {
     await setCookieToast(response?.data);
-    redirect("/login")
+    redirect("/login");
   }
-
-  
 }
