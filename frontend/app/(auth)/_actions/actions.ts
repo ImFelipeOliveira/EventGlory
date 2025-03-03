@@ -2,6 +2,7 @@
 
 import { setCookieToast } from "@/lib/toast/set-toast-cookie";
 import { actionAPIFetch } from "../../../lib/fetch-server";
+import { redirect } from "next/navigation";
 
 const endpoint = "register/";
 export default async function registerUser(data: any) {
@@ -14,5 +15,8 @@ export default async function registerUser(data: any) {
     await setCookieToast(response.error, response.error);
   } else {
     await setCookieToast(response?.data);
+    redirect("/login")
   }
+
+  
 }
