@@ -1,5 +1,6 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { FetchError } from "./fetch";
 
 export async function actionAPIFetch(input: string, init: RequestInit) {
@@ -23,13 +24,12 @@ async function actionFetch(
 
   let response;
   try {
-    console.log("config", config)
     response = await fetchFn(input, config);
   } catch (error) {
     console.log("Error", error);
 
-    if (error instanceof FetchError && error.info?.detail) {
-      return { error: error.info?.detail };
+    if (error instanceof FetchError && error.info[0]) {
+      return { error: error.info[0] };
     }
     if (error instanceof FetchError && error.info?.non_field_errors) {
       return { error: error.info?.non_field_errors };
@@ -53,13 +53,15 @@ export async function apiFetch(
   const ngnix = process.env.NEXT_PUBLIC_API_URL;
   const url = `${ngnix}${endpoint}`;
 
-  console.log("passei aqui", url);
   const response = await fetch(url, init);
 
   if (!response.ok) {
     const error = new FetchError("Erro ao buscar os dados");
     error.code = response.status;
     error.info = await response.json();
+    if (Array.isArray(error.info)) {
+      throw error;
+    }
     throw error;
   }
 

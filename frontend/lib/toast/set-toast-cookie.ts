@@ -1,16 +1,15 @@
 import { cookies } from "next/headers";
 
-export async function setCookieResponse(message: string, error?: string) {
+export async function setCookieToast(message: string, error?: string) {
   const toastCookie = await cookies();
   if (error) {
     const errorMessage: string =
       error != "Ocorreu um erro inesperado" ? error : message;
 
     if (error) {
-      toastCookie.set("toast-error", errorMessage);
-      return { error: errorMessage };
+      await toastCookie.set("toast-error", errorMessage);
     }
+  } else {
+    await toastCookie.set("toast-success", message);
   }
-  toastCookie.set("toast-success", message);
-  return { data: message };
 }

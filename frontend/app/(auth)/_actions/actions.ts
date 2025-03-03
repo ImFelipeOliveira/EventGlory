@@ -1,6 +1,6 @@
 "use server";
 
-import { setCookieResponse } from "@/lib/toast/set-toast-cookie";
+import { setCookieToast } from "@/lib/toast/set-toast-cookie";
 import { actionAPIFetch } from "../../../lib/fetch-server";
 
 const endpoint = "register/";
@@ -11,8 +11,8 @@ export default async function registerUser(data: any) {
   });
 
   if (response?.error) {
-    await setCookieResponse(response.error, response.error);
+    await setCookieToast(response.error, response.error);
   } else {
-    await setCookieResponse("User registered successfully");
+    await setCookieToast(response?.data);
   }
 }
