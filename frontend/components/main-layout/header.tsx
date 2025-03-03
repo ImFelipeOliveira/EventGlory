@@ -51,7 +51,7 @@ export default function Component() {
               <MagnifyingGlassIcon className="w-4 h-4 opacity-50" />
               <Input
                 type="search"
-                placeholder="Search the docs (t or /)"
+                placeholder="Search"
                 className="flex-1 text-sm"
                 autoFocus
               />
