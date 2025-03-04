@@ -34,20 +34,26 @@ export default function PerfilPopover() {
       <PopoverContent className="w-40 p-2">
         <div className="flex flex-col space-y-2">
           <Link href={""}>
-            <Button variant={"outline"} className="justify-start w-full">
+            <Button
+              variant={"outline"}
+              className="justify-start w-full cursor-pointer"
+            >
               <IoSettings />
               Configurações
             </Button>
           </Link>
           <Link href={""}>
-            <Button variant={"outline"} className="justify-start w-full">
+            <Button
+              variant={"outline"}
+              className="justify-start w-full cursor-pointer"
+            >
               <RxAvatar />
               Perfil
             </Button>
           </Link>
           <Button
             variant={"outline"}
-            className="justify-start w-full"
+            className="justify-start w-full cursor-pointer"
             onClick={logout}
           >
             <RxAvatar />
