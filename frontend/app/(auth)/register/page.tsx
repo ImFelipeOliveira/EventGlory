@@ -8,18 +8,22 @@ import RegisterForm from "@/components/auth/register-form";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
+import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
 export const registerFormSchema = z.object({
-  email: z.string().email("O email é obrigatório."),
-  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+  email: z.string().email({ message: "O email é obrigatório." }),
+  password: z
+    .string()
+    .min(6, { message: "A senha deve ter no mínimo 6 caracteres." }),
   password_confirmation: z
     .string()
-    .min(6, "A senha deve ter no mínimo 6 caracteres."),
+    .min(6, { message: "A senha deve ter no mínimo 6 caracteres." }),
 });
 
 export default function Register() {
   const form = useForm<z.infer<typeof registerFormSchema>>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       email: "",
       password: "",
