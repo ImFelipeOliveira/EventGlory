@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import PerfilPopover from "./popovers/perfil-popover";
 import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next/client";
-import UserMenuPopover from "./popovers/user-menu";
+import PerfilPopover from "./authenticated/popovers/perfil-popover";
+import UserMenuOptions from "./user-menu-options";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -70,7 +70,7 @@ export default function Header() {
           </PopoverContent>
         </Popover>
 
-        {isLogged ? <PerfilPopover /> : <UserMenuPopover />}
+        {isLogged ? <PerfilPopover /> : <UserMenuOptions />}
         <Button
           variant="outline"
           size="icon"
