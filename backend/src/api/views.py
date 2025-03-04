@@ -21,6 +21,7 @@ from .services import DependentesService, EventService, PersonService, RegisterU
 class RegisterUser(viewsets.ViewSet):
     serializer_class = RegisterUserSerializer
 
+    @extend_schema(parameters=[RegisterUserSerializer])
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
