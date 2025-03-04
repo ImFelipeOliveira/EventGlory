@@ -358,6 +358,18 @@ asgiref = ">=3.6"
 django = ">=4.2"
 
 [[package]]
+name = "django-cpf"
+version = "0.1.0"
+description = "Campo CPF Field para usar no Model e ModelForm"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "django-cpf-0.1.0.tar.gz", hash = "sha256:3c4519ddd2784ba4d1ec3ce14d16e9e12d36d9178fee2fa8c4b4be2fb4ed0f50"},
+    {file = "django_cpf-0.1.0-py3-none-any.whl", hash = "sha256:3b973632d4a2d3f8d0d028ddb0e312e42c6de9827556904e922a2ac68af493ac"},
+]
+
+[[package]]
 name = "django-filter"
 version = "25.1"
 description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
@@ -1320,4 +1332,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "1ed9248341b410008d7181e9a1f07e814952206be48d5fb8fc3393496b1673c4"
+content-hash = "a4baa878e2fcd2f2ed7a907f8dcdeb838c389e386a4b63d28a3782fec34ac004"
