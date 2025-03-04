@@ -14,10 +14,18 @@ import {
 import { Input } from "../ui/input";
 import Link from "next/link";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { registerFormSchema } from "@/app/(auth)/register/page";
+import z from "zod";
+import registerUser from "@/app/(auth)/_actions/actions";
 
 export default function RegisterForm() {
-  const formMethods = useFormContext();
+  const formMethods = useFormContext<z.infer<typeof registerFormSchema>>();
   const { handleSubmit } = formMethods;
+
+  const onSubmit = async (data: z.infer<typeof registerFormSchema>) => {
+    await registerUser(data);
+  };
+
   return (
     <Card className="w-[400px] flex justify-center">
       <CardHeader>
@@ -27,7 +35,7 @@ export default function RegisterForm() {
       </CardHeader>
       <CardContent>
         <Form {...formMethods}>
-          <form onSubmit={handleSubmit(() => undefined)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <FormField
               control={formMethods.control}
               name="email"

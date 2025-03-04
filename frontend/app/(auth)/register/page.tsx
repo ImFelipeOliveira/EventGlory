@@ -8,9 +8,25 @@ import RegisterForm from "@/components/auth/register-form";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
+import z from "zod";
+
+export const registerFormSchema = z.object({
+  email: z.string().email("O email é obrigatório."),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+  password_confirmation: z
+    .string()
+    .min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
 
 export default function Register() {
-  const form = useForm<{ email: string; password: string }>();
+  const form = useForm<z.infer<typeof registerFormSchema>>({
+    defaultValues: {
+      email: "",
+      password: "",
+      password_confirmation: "",
+    },
+  });
+
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
