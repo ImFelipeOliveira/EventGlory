@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+from localflavor.br.models import BRCPFField, BRStateField
 
 
 class Sexo(models.TextChoices):
@@ -113,10 +115,61 @@ class Event(BaseModel):
     end_date = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
     min_age = models.DateField(null=True)
-    price = models.DecimalField(decimal_places=2, max_digits=6)
+    price = models.DecimalField(
+        decimal_places=2,
+        max_digits=6,
+    )
+
+    max_participants = models.PositiveBigIntegerField(
+        verbose_name="Capacidade máxima",
+        help_text="Número máximo de participantes permitidos",
+        blank=True,
+        null=True,
+    )
+    city = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name="Cidade",
+    )
+    state = BRStateField(
+        blank=True,
+        null=True,
+        verbose_name="Estado",
+    )
+    registration_deadline = models.DateTimeField(
+        verbose_name="Data limite para inscrição",
+        help_text="Data limite para os participantes se inscreverem",
+        blank=True,
+        null=True,
+    )
+    categories = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name="Categorias",
+        help_text="Categorias separadas por vírgula (ex: Música, Jovens, Culto)",
+    )
+    requires_payment = models.BooleanField(
+        default=False,
+        verbose_name="Requer pagamento",
+        help_text="Indica se o evento requer pagamento para participação",
+    )
 
     def __str__(self):  # noqa: D105
         return f"{self.name}"
+
+    def is_registration_open(self):
+        """Verifica se as inscrições ainda estão abertas."""
+        return timezone.now() <= self.registration_deadline
+
+    def get_available_spots(self):
+        """Retorna o número de vagas disponíveis."""
+        registered_count = self.eventos.count()
+        return max(0, self.max_participants - registered_count)
+
+    class Meta:
+        ordering = ["-start_date"]
 
 
 class RegistrationQuerySet(models.QuerySet["Registration"]):
