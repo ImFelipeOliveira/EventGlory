@@ -6,8 +6,19 @@ import { publicEncrypt } from "crypto";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
+type registerData = {
+  email: string;
+  password: string;
+  password_confimation: string;
+};
+
+type loginData = {
+  username: string;
+  password: string;
+};
+
 const endpoint = "register/";
-export async function registerUser(data: any) {
+export async function registerUser(data: registerData) {
   const response = await actionAPIFetch(`${endpoint}`, {
     method: "POST",
     body: JSON.stringify(data),
@@ -21,7 +32,7 @@ export async function registerUser(data: any) {
   }
 }
 
-export async function loginUser(data: any) {
+export async function loginUser(data: loginData) {
   const response = await actionAPIFetch("token/", {
     method: "POST",
     body: JSON.stringify(data),
