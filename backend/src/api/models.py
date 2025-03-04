@@ -111,13 +111,24 @@ class Event(BaseModel):
         blank=True,
         null=True,
     )
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    description = models.TextField(blank=True, null=True)
-    min_age = models.DateField(null=True)
+    start_date = models.DateTimeField(
+        verbose_name="Data de Início",
+        help_text="Data de ínicio do evento",
+    )
+    end_date = models.DateTimeField(
+        verbose_name="Data de Fim",
+        help_text="Data de fim do Evento.",
+    )
+    description = models.TextField(blank=True, null=True, verbose_name="Descrição")
+    min_age = models.DateField(
+        null=True,
+        verbose_name="Idade mínima",
+        help_text="Idade mínima para inscrição no evento.",
+    )
     price = models.DecimalField(
         decimal_places=2,
         max_digits=6,
+        verbose_name="Preço",
     )
 
     max_participants = models.PositiveBigIntegerField(
