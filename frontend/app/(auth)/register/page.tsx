@@ -1,110 +1,71 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
-import registerUser from "../_actions/actions";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-export const formSchema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(8, "Senha deve ter no mínimo 6 caracteres"),
-  password_confirmation: z
-    .string()
-    .min(8, "Senha deve ter no mínimo 6 caracteres"),
-});
+import RegisterForm from "@/components/auth/register-form";
+import { Form } from "@/components/ui/form";
+import Image from "next/image";
+import favicon from "../../favicon.ico";
 
 export default function Register() {
-  const formMethods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      password_confirmation: "",
-    },
-  });
-
-  const { handleSubmit } = formMethods;
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await registerUser(values);
-  };
-
+  const form = useForm<{ email: string; password: string }>();
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Card className="w-[400px]">
-        <CardHeader>
-          <CardTitle className="flex justify-center mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            Registrar
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...formMethods}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={formMethods.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="gap-y-2">
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Digite um email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={formMethods.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Senha</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Digite sua senha"
-                        type="password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={formMethods.control}
-                name="password_confirmation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirmar senha</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Digite sua senha"
-                        type="password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full">
-                Registrar
-              </Button>
-            </form>
+    <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <Link
+        href="/examples/authentication"
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "absolute right-4 top-4 hidden md:right-8 md:top-8"
+        )}
+      >
+        Login
+      </Link>
+      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+        <div className="absolute inset-0 bg-zinc-900" />
+        <div className="relative z-20 flex items-center text-lg font-medium">
+          <Link href={"/home"}>
+            <Image
+              src={favicon}
+              alt="Logo"
+              style={{ borderRadius: "calc(infinity * 1px)" }}
+            />
+          </Link>
+        </div>
+        <div className="relative z-20 mt-auto">
+          <blockquote className="space-y-2">
+            <p className="text-lg">
+              "Com este modelo, organizar eventos cristãos se tornou mais
+              simples e eficiente, permitindo que mais pessoas sejam alcançadas
+              pelo amor de Deus."
+            </p>
+          </blockquote>
+        </div>
+      </div>
+      <div className="flex h-full items-center p-4 lg:p-8">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <Form {...form}>
+            <RegisterForm />
           </Form>
-        </CardContent>
-      </Card>
+          <p className=" px-8 text-center text-sm text-muted-foreground ml-10">
+            Ao clicar em Registrar, você concorda com nossos{" "}
+            <Link
+              href="/terms"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              Termos de Serviço
+            </Link>{" "}
+            e{" "}
+            <Link
+              href="/privacy"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              Politicas de Privacidade.
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
