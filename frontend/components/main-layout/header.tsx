@@ -13,7 +13,7 @@ import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import PerfilPopover from "./popovers/perfil-popover";
 import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next/client";
-import UserMenuPopover from "./popovers/user-menu-popover";
+import UserMenuPopover from "./popovers/user-menu";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();

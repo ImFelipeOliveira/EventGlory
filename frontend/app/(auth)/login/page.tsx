@@ -21,8 +21,8 @@ export default function Login() {
     resolver: zodResolver(loginForm),
     defaultValues: {
       username: "",
-      password: ""
-    }
+      password: "",
+    },
   });
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -61,22 +61,6 @@ export default function Login() {
           <Form {...form}>
             <LoginForm />
           </Form>
-          <p className="px-8 text-center text-sm text-muted-foreground ml-10">
-            Ao clicar em Registrar, você concorda com nossos{" "}
-            <Link
-              href="/terms"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Termos de Serviço
-            </Link>{" "}
-            e{" "}
-            <Link
-              href="/privacy"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Politicas de Privacidade.
-            </Link>
-          </p>
         </div>
       </div>
     </div>
