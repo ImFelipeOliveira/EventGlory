@@ -1,8 +1,8 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
+import { Button } from "../../../components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,27 +10,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from "../../../components/ui/form";
+import { Input } from "../../../components/ui/input";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { registerFormSchema } from "@/app/(auth)/register/page";
-import z from "zod";
-import { registerUser } from "@/app/(auth)/_actions/actions";
+import { z } from "zod";
+import { loginForm } from "@/app/(auth)/login/page";
+import { loginUser } from "@/app/(auth)/_actions/actions";
 
-export default function RegisterForm() {
-  const formMethods = useFormContext<z.infer<typeof registerFormSchema>>();
+export default function LoginForm() {
+  const formMethods = useFormContext<z.infer<typeof loginForm>>();
+
   const { handleSubmit } = formMethods;
 
-  const onSubmit = async (data: z.infer<typeof registerFormSchema>) => {
-    await registerUser(data);
+  const onSubmit = async (data: z.infer<typeof loginForm>) => {
+    await loginUser(data);
   };
 
   return (
     <Card className="w-[400px] flex justify-center">
       <CardHeader>
         <CardTitle className="flex justify-center mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-          Registrar
+          Login
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -38,7 +39,7 @@ export default function RegisterForm() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <FormField
               control={formMethods.control}
-              name="email"
+              name="username"
               render={({ field }) => (
                 <FormItem className="gap-y-2">
                   <FormLabel>Email</FormLabel>
@@ -66,25 +67,8 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={formMethods.control}
-              name="password_confirmation"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirmar senha</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Digite sua senha"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Button type="submit" className="w-full cursor-pointer">
-              Registrar
+              Login
             </Button>
 
             <div className="flex items-center justify-center space-x-2">
@@ -114,13 +98,13 @@ export default function RegisterForm() {
               </Link>
             </div>
             <div className="flex justify-center mt-4">
-              <Link href="/login">
+              <Link href="/register">
                 <Button
                   variant="outline"
                   className="text-sm text-primary cursor-pointer"
                   style={{ width: "150px" }}
                 >
-                  Login
+                  Registrar
                 </Button>
               </Link>
             </div>

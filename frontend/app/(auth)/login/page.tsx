@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
-import LoginForm from "@/components/auth/login-form";
+import LoginForm from "@/app/(auth)/components/login-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 

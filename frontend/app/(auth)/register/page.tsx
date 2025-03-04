@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import RegisterForm from "@/components/auth/register-form";
+import RegisterForm from "@/app/(auth)/components/register-form";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
