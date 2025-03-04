@@ -12,7 +12,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export const loginForm = z.object({
-  email: z.string().email("Você deve informar um email."),
+  username: z.string().email("Você deve informar um email."),
   password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
 });
 
@@ -20,7 +20,7 @@ export default function Login() {
   const form = useForm<z.infer<typeof loginForm>>({
     resolver: zodResolver(loginForm),
     defaultValues: {
-      email: "",
+      username: "",
       password: ""
     }
   });

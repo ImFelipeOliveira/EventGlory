@@ -1,6 +1,5 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { FetchError } from "./fetch";
 
 export async function actionAPIFetch(input: string, init: RequestInit) {

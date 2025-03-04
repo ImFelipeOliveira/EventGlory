@@ -16,7 +16,7 @@ import Link from "next/link";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { registerFormSchema } from "@/app/(auth)/register/page";
 import z from "zod";
-import registerUser from "@/app/(auth)/_actions/actions";
+import { registerUser } from "@/app/(auth)/_actions/actions";
 
 export default function RegisterForm() {
   const formMethods = useFormContext<z.infer<typeof registerFormSchema>>();

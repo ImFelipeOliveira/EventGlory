@@ -16,12 +16,17 @@ import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
 import { z } from "zod";
 import { loginForm } from "@/app/(auth)/login/page";
+import { loginUser } from "@/app/(auth)/_actions/actions";
 
 export default function LoginForm() {
-  
   const formMethods = useFormContext<z.infer<typeof loginForm>>();
 
   const { handleSubmit } = formMethods;
+
+  const onSubmit = async (data: z.infer<typeof loginForm>) => {
+    await loginUser(data);
+  };
+
   return (
     <Card className="w-[400px] flex justify-center">
       <CardHeader>
@@ -31,10 +36,10 @@ export default function LoginForm() {
       </CardHeader>
       <CardContent>
         <Form {...formMethods}>
-          <form onSubmit={handleSubmit(() => undefined)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <FormField
               control={formMethods.control}
-              name="email"
+              name="username"
               render={({ field }) => (
                 <FormItem className="gap-y-2">
                   <FormLabel>Email</FormLabel>
