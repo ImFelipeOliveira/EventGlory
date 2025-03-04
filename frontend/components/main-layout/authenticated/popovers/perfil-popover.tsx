@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from "@radix-ui/react-popover";
 import Image from "next/image";
-import favicon from "../../../app/favicon.ico";
+import favicon from "../../../../app/favicon.ico";
 import Link from "next/link";
 import { IoSettings } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
