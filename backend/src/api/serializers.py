@@ -43,6 +43,7 @@ class CreatePersonSerializer(serializers.ModelSerializer):
         model = Pessoa
         fields = [
             "name",
+            "cpf",
             "date_of_birth",
             "sexo",
             "dependentes",

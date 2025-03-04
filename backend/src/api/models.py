@@ -46,7 +46,7 @@ class BaseModel(models.Model):
         ordering = ["-created"]
 
 
-class Endereco(BaseModel):
+class Endereco(models.Model):
     logradouro = models.CharField(max_length=40)
     numero = models.IntegerField(null=True, blank=True)
     bairro = models.CharField(max_length=40)
@@ -56,7 +56,7 @@ class Endereco(BaseModel):
         return f"{self.logradouro}, {self.numero}"
 
 
-class Contato(BaseModel):
+class Contato(models.Model):
     telefone = models.CharField(max_length=14)
 
 
@@ -65,7 +65,7 @@ class PessoaQuerySet(models.QuerySet["Pessoa"]):
         return self.filter(responsavel__user=user)
 
 
-class Pessoa(BaseModel):
+class Pessoa(models.Model):
     objects: PessoaQuerySet = PessoaQuerySet().as_manager()
     user = models.ForeignKey(
         User,
@@ -188,7 +188,7 @@ class RegistrationQuerySet(models.QuerySet["Registration"]):
         return self.filter(pessoas__user=user)
 
 
-class Registration(BaseModel):
+class Registration(models.Model):
     objects: RegistrationQuerySet = RegistrationQuerySet.as_manager()
 
     event = models.ManyToManyField(

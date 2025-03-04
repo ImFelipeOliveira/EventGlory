@@ -40,7 +40,7 @@ class CreatePersonViewSet(viewsets.ViewSet):
     serializer_class = CreatePersonSerializer
     permission_classes = [IsAuthenticated, UserIsNotPerson]
 
-    @extend_schema(responses={201: MessageSerializer})
+    @extend_schema(parameters=[CreatePersonSerializer], responses={201: MessageSerializer})
     def create(self, request):
         """Endpoint de criação e vinculação do usuário padrão do django com a entidade Pessoa."""
         serializer = self.serializer_class(data=request.data)
