@@ -72,6 +72,7 @@ class Pessoa(BaseModel):
         blank=True,
     )
     name = models.CharField()
+    cpf = BRCPFField(blank=True, null=True)
     date_of_birth = models.DateField(null=True)
     sexo = models.CharField(
         choices=Sexo,
