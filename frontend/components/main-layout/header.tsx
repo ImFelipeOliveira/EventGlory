@@ -12,6 +12,8 @@ import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import favicon from "../../app/favicon.ico";
+import { IoSettings } from "react-icons/io5";
+import { RxAvatar } from "react-icons/rx";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -71,13 +73,30 @@ export default function Header() {
                   borderRadius: "calc(infinity * 1px)",
                 }}
               />
-              <span className="sr-only">View profile</span>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-40 p-2"></PopoverContent>
+          <PopoverContent className="w-40 p-2">
+            <Link href={""}>
+              <Button variant={"outline"} className="justify-start w-full">
+                <IoSettings />
+                Configurações
+              </Button>
+            </Link>
+            <Link href={""}>
+              <Button variant={"outline"} className="justify-start w-full">
+                <RxAvatar />
+                Perfil
+              </Button>
+            </Link>
+          </PopoverContent>
         </Popover>
 
-        <Button variant="outline" size="icon" onClick={toggleColorMode}>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={toggleColorMode}
+          style={{ cursor: "pointer" }}
+        >
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
       </div>
