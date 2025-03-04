@@ -46,3 +46,16 @@ export async function loginUser(data: loginData) {
     redirect("/home");
   }
 }
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("refresh_token");
+  cookieStore.delete("token_access");
+
+  if (typeof window !== "undefined") {
+    const event = new Event("userLoggedOut");
+    window.dispatchEvent(event);
+  }
+
+  redirect("/login");
+}

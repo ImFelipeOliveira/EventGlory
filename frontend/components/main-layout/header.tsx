@@ -10,13 +10,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import favicon from "../../app/favicon.ico";
-import { IoSettings } from "react-icons/io5";
-import { RxAvatar } from "react-icons/rx";
+import PerfilPopover from "./popovers/perfil-popover";
+import { useEffect, useState } from "react";
+import { getCookie } from "cookies-next/client";
+import UserMenuPopover from "./popovers/user-menu-popover";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    const getUserIsLogged = () => {
+      const accessToken = getCookie("token_access");
+      return !!accessToken;
+    };
+
+    setIsLogged(getUserIsLogged());
+  }, []);
 
   const toggleColorMode = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -59,38 +69,8 @@ export default function Header() {
             </form>
           </PopoverContent>
         </Popover>
-        <Popover>
-          <PopoverTrigger asChild style={{ cursor: "pointer" }}>
-            <Button variant="outline" size="icon" className="rounded-full">
-              <Image
-                src={favicon}
-                alt="Avatar"
-                width={32}
-                height={32}
-                style={{
-                  aspectRatio: "32/32",
-                  objectFit: "cover",
-                  borderRadius: "calc(infinity * 1px)",
-                }}
-              />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-40 p-2">
-            <Link href={""}>
-              <Button variant={"outline"} className="justify-start w-full">
-                <IoSettings />
-                Configurações
-              </Button>
-            </Link>
-            <Link href={""}>
-              <Button variant={"outline"} className="justify-start w-full">
-                <RxAvatar />
-                Perfil
-              </Button>
-            </Link>
-          </PopoverContent>
-        </Popover>
 
+        {isLogged ? <PerfilPopover /> : <UserMenuPopover />}
         <Button
           variant="outline"
           size="icon"
