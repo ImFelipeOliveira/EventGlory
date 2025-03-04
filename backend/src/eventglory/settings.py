@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "drf_social_oauth2",
     # CorsHeaders
     "corsheaders",
+    # BRStates
+    "localflavor",
     # APPs
     "api",
 ]
