@@ -14,9 +14,13 @@ import {
 import { Input } from "../ui/input";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
+import { z } from "zod";
+import { loginForm } from "@/app/(auth)/login/page";
 
 export default function LoginForm() {
-  const formMethods = useFormContext();
+  
+  const formMethods = useFormContext<z.infer<typeof loginForm>>();
+
   const { handleSubmit } = formMethods;
   return (
     <Card className="w-[400px] flex justify-center">
@@ -72,19 +76,29 @@ export default function LoginForm() {
 
             <div className="flex justify-center space-x-5">
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px", cursor: "pointer"}}>
+                <Button
+                  variant={"outline"}
+                  style={{ width: "150px", cursor: "pointer" }}
+                >
                   <FaGoogle title="Google" />
                 </Button>
               </Link>
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px", cursor: "pointer"}}>
+                <Button
+                  variant={"outline"}
+                  style={{ width: "150px", cursor: "pointer" }}
+                >
                   <FaFacebook title="Facebook" />
                 </Button>
               </Link>
             </div>
             <div className="flex justify-center mt-4">
               <Link href="/register">
-                <Button variant="outline" className="text-sm text-primary cursor-pointer" style={{width: "150px"}}>
+                <Button
+                  variant="outline"
+                  className="text-sm text-primary cursor-pointer"
+                  style={{ width: "150px" }}
+                >
                   Registrar
                 </Button>
               </Link>

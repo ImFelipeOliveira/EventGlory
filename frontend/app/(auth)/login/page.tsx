@@ -8,9 +8,22 @@ import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
 import LoginForm from "@/components/auth/login-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+export const loginForm = z.object({
+  email: z.string().email("Você deve informar um email."),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
 
 export default function Login() {
-  const form = useForm<{ email: string; password: string }>();
+  const form = useForm<z.infer<typeof loginForm>>({
+    resolver: zodResolver(loginForm),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
