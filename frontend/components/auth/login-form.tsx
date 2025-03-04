@@ -58,7 +58,7 @@ export default function LoginForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               Login
             </Button>
 
@@ -72,19 +72,19 @@ export default function LoginForm() {
 
             <div className="flex justify-center space-x-5">
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px" }}>
+                <Button variant={"outline"} style={{ width: "150px", cursor: "pointer"}}>
                   <FaGoogle title="Google" />
                 </Button>
               </Link>
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px" }}>
+                <Button variant={"outline"} style={{ width: "150px", cursor: "pointer"}}>
                   <FaFacebook title="Facebook" />
                 </Button>
               </Link>
             </div>
             <div className="flex justify-center mt-4">
               <Link href="/register">
-                <Button variant="link" className="text-sm text-primary">
+                <Button variant="outline" className="text-sm text-primary cursor-pointer" style={{width: "150px"}}>
                   Registrar
                 </Button>
               </Link>

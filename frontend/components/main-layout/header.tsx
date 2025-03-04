@@ -9,11 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
-import { MoonIcon, SunIcon, MagnifyingGlassIcon} from "@radix-ui/react-icons";
+import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import favicon from "../../app/favicon.ico";
 
-export default function Component() {
+export default function Header() {
   const { theme, setTheme } = useTheme();
 
   const toggleColorMode = () => {
@@ -57,20 +57,26 @@ export default function Component() {
             </form>
           </PopoverContent>
         </Popover>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Image
-            src={favicon}
-            alt="Avatar"
-            width={32}
-            height={32}
-            style={{
-              aspectRatio: "32/32",
-              objectFit: "cover",
-              borderRadius: "calc(infinity * 1px)",
-            }}
-          />
-          <span className="sr-only">View profile</span>
-        </Button>
+        <Popover>
+          <PopoverTrigger asChild style={{ cursor: "pointer" }}>
+            <Button variant="outline" size="icon" className="rounded-full">
+              <Image
+                src={favicon}
+                alt="Avatar"
+                width={32}
+                height={32}
+                style={{
+                  aspectRatio: "32/32",
+                  objectFit: "cover",
+                  borderRadius: "calc(infinity * 1px)",
+                }}
+              />
+              <span className="sr-only">View profile</span>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-40 p-2"></PopoverContent>
+        </Popover>
+
         <Button variant="outline" size="icon" onClick={toggleColorMode}>
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>

@@ -75,7 +75,7 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               Registrar
             </Button>
 
@@ -86,22 +86,32 @@ export default function RegisterForm() {
               </span>
               <hr className="flex-grow border-t border-muted-foreground border-0.2" />
             </div>
-            
+
             <div className="flex justify-center space-x-5">
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px" }}>
+                <Button
+                  variant={"outline"}
+                  style={{ width: "150px", cursor: "pointer" }}
+                >
                   <FaGoogle title="Google" />
                 </Button>
               </Link>
               <Link href={"#"}>
-                <Button variant={"outline"} style={{ width: "150px" }}>
+                <Button
+                  variant={"outline"}
+                  style={{ width: "150px", cursor: "pointer" }}
+                >
                   <FaFacebook title="Facebook" />
                 </Button>
               </Link>
             </div>
             <div className="flex justify-center mt-4">
               <Link href="/login">
-                <Button variant="link" className="text-sm text-primary">
+                <Button
+                  variant="outline"
+                  className="text-sm text-primary cursor-pointer"
+                  style={{ width: "150px" }}
+                >
                   Login
                 </Button>
               </Link>
