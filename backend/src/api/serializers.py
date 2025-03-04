@@ -53,17 +53,7 @@ class CreatePersonSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = [
-            "id",
-            "name",
-            "image",
-            "start_date",
-            "end_date",
-            "description",
-            "price",
-            "created_by",
-            "updated_by",
-        ]
+        fields = "__all__"
         read_only_fields = ["created_by", "updated_by"]
 
     def create(self, validated_data):
