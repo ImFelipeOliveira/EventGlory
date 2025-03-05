@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { PartyPopper, Home, LayoutDashboard, User } from "lucide-react";
 
 import {
   Sidebar,
@@ -15,29 +15,19 @@ import { Separator } from "@radix-ui/react-separator";
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Eventos",
     url: "#",
-    icon: Home,
+    icon: PartyPopper,
   },
   {
-    title: "Inbox",
+    title: "Dashboard",
     url: "#",
-    icon: Inbox,
+    icon: LayoutDashboard,
   },
   {
-    title: "Calendar",
+    title: "Perfil de Vendas",
     url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    icon: User,
   },
 ];
 
@@ -51,7 +41,7 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <hr className="mb-2" />
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1.5">
+            <SidebarMenu className="gap-2">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
