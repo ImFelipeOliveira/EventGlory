@@ -1,11 +1,12 @@
 "user server";
 
-import { decodeJwt } from "jose";
+import { jwtVerify } from "jose";
 
-export async function decrypt(token: string | undefined = "") {
+const SECRET_KEY = new TextEncoder().encode(process.env.NEXT_PUBLIC_SECRET_KEY);
+export async function verifyToken(token: string | undefined = "") {
   if (token === "") {
     return null;
   }
-  const tokenPayload = decodeJwt(token);
+  const tokenPayload = jwtVerify(token, SECRET_KEY);
   return tokenPayload;
 }
