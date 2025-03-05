@@ -1,5 +1,6 @@
 [tool.taskipy.tasks]
 dc = "docker compose"
 up = "task dc up -d --remove-orphans"
+build = "task dc up --build"
 down = "task dc down"
 exec = "task dc exec"
