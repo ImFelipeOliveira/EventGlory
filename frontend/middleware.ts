@@ -1,8 +1,10 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./lib/utils/session";
+import { TokenManager } from "./lib/utils/token-manager";
+import { JWTPayload } from "jose";
 
-const protectedRoutes = ["/eventos"];
+const protectedRoutes = ["/area-do-criador"];
 const publicRoutes = ["/login", "/register"];
 export async function middleware(req: NextRequest) {
   const cookieStore = await cookies();
@@ -20,9 +22,25 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
+  const refreshResult = handleTokenRefresh(session, req);
+  if (refreshResult) return refreshResult;
+
   return NextResponse.next();
 }
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
+
+export async function handleTokenRefresh(
+  session: JWTPayload | null,
+  req: NextRequest
+) {
+  if (session && (await TokenManager.shouldRefreshToken(session))) {
+    const newToken = await TokenManager.refreshToken();
+    if (!newToken) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+  }
+  return null;
+}
