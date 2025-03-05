@@ -1,10 +1,10 @@
 "use client";
 
 import React, { use, useEffect } from "react";
-import { Toaster } from "@/src/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { useTheme } from "next-themes";
 import { ToasterProps } from "sonner";
-import { useCookieToast } from "@/src/lib/toast/toast";
+import { useCookieToast } from "@/lib/toast/toast";
 
 export default function ToastProvider({
   children,

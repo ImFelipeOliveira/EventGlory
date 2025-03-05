@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -11,7 +11,7 @@ import favicon from "../../../../app/favicon.ico";
 import Link from "next/link";
 import { IoSettings } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
-import { logout } from "@/src/app/(auth)/_actions/actions";
+import { logout } from "@/app/(auth)/_actions/actions";
 
 export default function PerfilPopover() {
   return (

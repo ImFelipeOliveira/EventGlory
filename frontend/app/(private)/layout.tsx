@@ -1,4 +1,4 @@
-import Header from "@/src/components/main-layout/header";
+import Header from "@/components/main-layout/header";
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -1,6 +1,6 @@
 "use server";
 
-import { setCookieToast } from "@/src/lib/toast/set-toast-cookie";
+import { setCookieToast } from "@/lib/toast/set-toast-cookie";
 import { actionAPIFetch } from "../../../lib/fetch-server";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";

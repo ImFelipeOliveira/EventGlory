@@ -1,4 +1,4 @@
-import { Form } from "@/src/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { useFormContext } from "react-hook-form";
 
 export default function EventoForm() {

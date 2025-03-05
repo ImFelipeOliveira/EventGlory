@@ -5,9 +5,9 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@/src/components/ui/popover";
-import { Button } from "@/src/components/ui/button";
-import { Input } from "@/src/components/ui/input";
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";

@@ -15,8 +15,8 @@ import { Input } from "../../../components/ui/input";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
 import { z } from "zod";
-import { loginForm } from "@/src/app/(auth)/login/page";
-import { loginUser } from "@/src/app/(auth)/_actions/actions";
+import { loginForm } from "@/app/(auth)/login/page";
+import { loginUser } from "@/app/(auth)/_actions/actions";
 
 export default function LoginForm() {
   const formMethods = useFormContext<z.infer<typeof loginForm>>();

@@ -1,11 +1,11 @@
 "use client";
 
-import { buttonVariants } from "@/src/components/ui/button";
-import { cn } from "@/src/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import RegisterForm from "@/src/app/(auth)/components/register-form";
-import { Form } from "@/src/components/ui/form";
+import RegisterForm from "@/app/(auth)/components/register-form";
+import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import favicon from "../../favicon.ico";
 import { zodResolver } from "@hookform/resolvers/zod";
