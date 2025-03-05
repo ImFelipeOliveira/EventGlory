@@ -30,21 +30,17 @@ export async function handlerRouterProtection(
   token: string | undefined,
   req: NextRequest
 ) {
-  try {
-    const session = await verifyToken(token);
+  const session = await verifyToken(token);
 
-    const isProtectedRoute = protectedRoutes.includes(req.nextUrl.pathname);
-    const isPublicRoute = publicRoutes.includes(req.nextUrl.pathname);
+  const isProtectedRoute = protectedRoutes.includes(req.nextUrl.pathname);
+  const isPublicRoute = publicRoutes.includes(req.nextUrl.pathname);
 
-    if (isProtectedRoute && !session?.payload.user_id) {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
+  if (isProtectedRoute && !session?.payload.user_id) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
-    if (isPublicRoute && session?.payload.user_id) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
-  } catch {
-    TokenManager.clearTokens();
+  if (isPublicRoute && session?.payload.user_id) {
+    return NextResponse.redirect(new URL("/", req.url));
   }
 }
 
