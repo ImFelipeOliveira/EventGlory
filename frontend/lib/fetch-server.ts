@@ -30,6 +30,9 @@ async function actionFetch(
     if (error instanceof FetchError && error.info[0]) {
       return { error: error.info[0] };
     }
+    if (error instanceof FetchError && error.detail) {
+      return { error: error };
+    }
     if (error instanceof FetchError && error.info?.non_field_errors) {
       return { error: error.info?.non_field_errors };
     }
