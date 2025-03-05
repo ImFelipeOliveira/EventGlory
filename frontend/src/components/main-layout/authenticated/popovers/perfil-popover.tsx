@@ -39,7 +39,7 @@ export default function PerfilPopover() {
               className="justify-start w-full cursor-pointer"
             >
               <IoSettings />
-              Configurações
+              Área do Criador
             </Button>
           </Link>
           <Link href={""}>

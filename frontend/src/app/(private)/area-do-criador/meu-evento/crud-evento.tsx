@@ -5,9 +5,7 @@ export default function EventoForm() {
   const formMethods = useFormContext();
   return (
     <Form {...formMethods}>
-      <form action="">
-        
-      </form>
+      <form action=""></form>
     </Form>
   );
 }

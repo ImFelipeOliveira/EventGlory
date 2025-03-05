@@ -70,9 +70,9 @@ export default function Header() {
             </form>
           </PopoverContent>
         </Popover>
-        {isLogged === true && (
+        {isLogged === true && path !== "/area-do-criador" && (
           <div className="flex gap-x-4">
-            <Link href={"eventos/"}>
+            <Link href={"area-do-criador/"}>
               <Button
                 variant={"outline"}
                 className="ml-0 w-35"
