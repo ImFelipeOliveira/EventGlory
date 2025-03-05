@@ -1,4 +1,5 @@
-import { Session } from "inspector/promises";
+"user server";
+
 import { decodeJwt } from "jose";
 
 export async function decrypt(token: string | undefined = "") {
