@@ -1,7 +1,4 @@
-import { AppSidebar } from "@/components/AppSidebar";
 import Header from "@/components/main-layout/header";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import WrapperLayout from "@/components/main-layout/layout-wrapper";
 
 export default function RootLayout({
   children,
@@ -11,13 +8,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <SidebarProvider>
-        <AppSidebar />
-        <main>
-          <SidebarTrigger/>
-          {children}
-        </main>
-      </SidebarProvider>
+      <main>{children}</main>
     </>
   );
 }
