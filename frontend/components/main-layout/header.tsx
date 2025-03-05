@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next/client";
 import PerfilPopover from "./authenticated/popovers/perfil-popover";
 import UserMenuOptions from "./user-menu-options";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -33,6 +34,8 @@ export default function Header() {
     setTheme(newTheme);
   };
 
+  const path = usePathname();
+
   return (
     <header className="flex items-center h-16 px-4 border-b bg-white lg:px-6 dark:bg-gray-950">
       <div className="flex items-center space-x-4">
@@ -47,9 +50,7 @@ export default function Header() {
           href="#"
           className="text-sm font-medium underline"
           prefetch={false}
-        >
-          Example
-        </Link>
+        ></Link>
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -69,6 +70,19 @@ export default function Header() {
             </form>
           </PopoverContent>
         </Popover>
+        {isLogged === true && (
+          <div className="flex gap-x-4">
+            <Link href={"eventos/"}>
+              <Button
+                variant={"outline"}
+                className="ml-0 w-35"
+                style={{ cursor: "pointer" }}
+              >
+                CRIE SEU EVENTO
+              </Button>
+            </Link>
+          </div>
+        )}
 
         {isLogged ? <PerfilPopover /> : <UserMenuOptions />}
         <Button
