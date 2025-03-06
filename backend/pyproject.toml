@@ -1,6 +1,7 @@
 [project]
 name = "backend"
 version = "0.1.0"
+License = "MIT"
 description = ""
 authors = [
     {name = "Felipe Oliveira",email = "flipeaz342@gmail.com"}
