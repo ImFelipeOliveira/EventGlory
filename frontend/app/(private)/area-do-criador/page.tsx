@@ -6,8 +6,7 @@ export default function AreaDoCriadorPage() {
     <>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarTrigger />
-        Área do Criador
+        <SidebarTrigger className="sticky top-16" />
       </SidebarProvider>
     </>
   );
