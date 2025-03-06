@@ -37,7 +37,11 @@ export default function Header() {
   const path = usePathname();
 
   return (
-    <header className="flex items-center h-16 px-4 border-b bg-white lg:px-6 dark:bg-gray-950">
+    <header
+      className={
+        "flex items-center sticky top-0 h-16 px-4 border-b bg-white lg:px-6 dark:bg-gray-950 shadow-lg"
+      }
+    >
       <div className="flex items-center space-x-4">
         <Link
           href="#"
