@@ -6,9 +6,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="min-h-screen">
       <Header />
-      <main>{children}</main>
-    </>
+      <div className="flex-1 h-[calc(100vh-4rem)] overflow-hidden">
+        <main>{children}</main>
+      </div>
+    </div>
   );
 }

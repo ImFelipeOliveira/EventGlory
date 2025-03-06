@@ -6,7 +6,7 @@ export default function AreaDoCriadorPage() {
     <>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarTrigger className="sticky top-16" />
+        <SidebarTrigger className="sticky" />
       </SidebarProvider>
     </>
   );
