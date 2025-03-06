@@ -1,6 +1,6 @@
 "user server";
 
-import { decodeJwt, jwtDecrypt, JWTPayload } from "jose";
+import { decodeJwt } from "jose";
 import { cookies } from "next/headers";
 import { actionAPIFetch } from "../fetch-server";
 
